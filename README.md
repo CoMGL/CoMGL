@@ -6,8 +6,7 @@
 ## Data 
 
 ### Data Preparation
-
-数据集按照`OGB Dataset`格式，放置在`./data/`目录下.
+The dataset is placed in the `./data/` directory according to the `OGB Dataset` format.
 
 Template class for the `dataset`
 ```python
@@ -27,8 +26,8 @@ data[("paper", "to", "author")].edge_index = ...  # [2, num_edges]
 
 ### Data Process
 
-- 满足Inductive 的场景设置，划分train/val/test 数据集，去除各部分数据集Main view中多余的边，但Auxiliary view 的边全部保留；
-- 去除val/test 数据集中Main view的所有边，满足"Strict Cold Start" 场景；
+- To satisfy the inductive setting, divide the train/val/test datasets, remove the redundant edges in the Main view of each dataset, but keep all the edges in the Auxiliary view;
+- Remove all edges in the Main view of the val/test datasets to satisfy the "Strict Cold Start" scenario;
 
 ![](https://cdn.jsdelivr.net/gh/Zaiyun27/Imgur/img/202211132039830.png)
 
@@ -36,12 +35,12 @@ data[("paper", "to", "author")].edge_index = ...  # [2, num_edges]
 
 - Heterogeneous Grpah
     - Encoder
-        - Graph SAGE: 每个view 单独建立一张异构图及对应的Encoder
+        - Graph SAGE: Each view establishes a separate heterogeneous graph and corresponding Encoder
     - Aggregator
-        - Uncertainty Estimate / Attention: 聚合Auxiliary view 的paper 表征，用于Main view 的预测任务
+        - Uncertainty Estimate / Attention: Aggregate Auxiliary view's paper representation for the prediction task of the Main view
     - Predictor
-        - Main view Predictor: 链路预测 / 节点分类
-        - Auxiliary view Predictor: 辅助任务的链路预测
+        - Main view Predictor: Link prediction / Node classification
+        - Auxiliary view Predictor: Link prediction for auxiliary tasks
 
 
 ## Experiments
@@ -50,7 +49,7 @@ data[("paper", "to", "author")].edge_index = ...  # [2, num_edges]
 
 1. Auxiliary views encode
 2. Auxiliary views’ paper embedding aggregate
-3. Main view 边生成
+3. Main view edge generation
 4. Main view encode
 5. Main view’s node prediction task
 
